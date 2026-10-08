@@ -14,7 +14,7 @@ the vendored app folder (see [UPSTREAM.md](UPSTREAM.md)).
 
 ```bash
 isoloom generate
-isoloom up docker
+isoloom run docker
 ```
 
 Then open http://localhost:10005/, create a player at `/create` and log in. The same spec runs as Docker on a local VM (`docker-vm`), on a cloud VM
