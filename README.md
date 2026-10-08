@@ -1,0 +1,29 @@
+# secDevLabs Tic-Tac-Toe
+
+[secDevLabs](https://github.com/globocom/secDevLabs)' [`owasp-top10-2021-apps/a1/tictactoe`](https://github.com/globocom/secDevLabs/tree/10be438496e928c66567749f0aaf0bb976052bc9/owasp-top10-2021-apps/a1/tictactoe) app, by Globo.com and the
+secDevLabs contributors: a Node.js (Express) tic-tac-toe game backed by MariaDB with a Broken Access Control flaw: the statistics route trusts the player named in its query string. This repository runs it with
+[Isoloom](https://www.isoloom.com): [`isoloom.yml`](isoloom.yml) describes the machines, built from
+the vendored app folder (see [UPSTREAM.md](UPSTREAM.md)).
+
+| Machine | Service |
+| --- | --- |
+| web | Tic-Tac-Toe on port 10005 |
+| mysqldb | MariaDB 10.8.3 on port 3306 (lab network only) |
+
+## Run it
+
+```bash
+isoloom generate
+isoloom up docker
+```
+
+Then open http://localhost:10005/, create a player at `/create` and log in. The same spec runs as Docker on a local VM (`docker-vm`), on a cloud VM
+(`cloud-docker`) or on Kubernetes. Lab guide: the app's
+[README](https://github.com/globocom/secDevLabs/blob/10be438496e928c66567749f0aaf0bb976052bc9/owasp-top10-2021-apps/a1/tictactoe/README.md), with the attack narrative and the secDevLabs walkthrough.
+
+Upstream version and commit: [UPSTREAM.md](UPSTREAM.md).
+
+## Licence
+
+BSD-3-Clause, as secDevLabs ([LICENSE](LICENSE)). The third-party software inside the images keeps
+its own licence. This application is deliberately vulnerable: keep it isolated.

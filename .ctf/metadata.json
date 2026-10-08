@@ -1,0 +1,13 @@
+{
+  "title": "secDevLabs Tic-Tac-Toe",
+  "description": "A Node.js tic-tac-toe game backed by MariaDB that keeps each player's wins, ties and losses. The statistics page loads its numbers from an API route that takes the player's name as a parameter.",
+  "question": "Read another player's game statistics while logged in as yourself.",
+  "category": "WEB",
+  "difficulty": 1,
+  "evidence_kind": "SECRET",
+  "capabilities": [
+    "broken-access-control",
+    "idor",
+    "session-cookie"
+  ]
+}

@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://www.isoloom.com/schema/v1.json
+# Tic-Tac-Toe (secDevLabs, by Globo.com) as an Isoloom spec: a Node.js game with a Broken Access
+# Control flaw in its statistics route, vendored unchanged in build/web/app/ (the app folder
+# owasp-top10-2021-apps/a1/tictactoe of secDevLabs), built by an overlay of upstream's
+# Dockerfile, and its MariaDB machine. `isoloom generate`, then `isoloom up docker`.
+version: 1
+name: secdevlabs-tictactoe
+
+networks:
+  lab: { cidr: 10.60.92.0/24, internet: false }
+
+machines:
+  mysqldb:
+    networks: { lab: 20 }
+    services: [{ port: 3306, name: mariadb }]
+    resources: { cpus: 1, memory_mb: 512 }
+    volumes: { data: /var/lib/mysql }
+    docker:
+      build: build/mysqldb
+
+  web:
+    networks: { lab: 10 }
+    services: [{ port: 10005, name: web, http: true, publish: 10005 }]
+    resources: { cpus: 1, memory_mb: 512 }
+    depends_on: [mysqldb]
+    docker:
+      build: build/web
+
+checks:
+  - name: the login page answers
+    http: http://web:10005/login
+    wait: 180
+  - name: a player signs up, logs in and reads its statistics
+    script: checks/statistics.sh
+    wait: 60
+
+message: |
+  Tic-Tac-Toe answers at http://localhost:{{ machines.web.services.0.publish }}/. Create two
+  players at /create, play a few games, then watch how /statistics fetches its data.
