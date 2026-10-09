@@ -4,10 +4,5 @@
   "question": "Read another player's game statistics while logged in as yourself.",
   "category": "WEB",
   "difficulty": 1,
-  "evidence_kind": "SECRET",
-  "capabilities": [
-    "broken-access-control",
-    "idor",
-    "session-cookie"
-  ]
+  "evidence_kind": "SECRET"
 }
