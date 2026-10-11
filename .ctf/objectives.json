@@ -1,0 +1,32 @@
+{
+  "objectives": [
+    {
+      "key": "main",
+      "title": "Read the flag",
+      "prompt": "Read another player's statistics and retrieve the flag (/ctf/flag).",
+      "check": {
+        "evidence": "SECRET",
+        "format": "FLAG{%s}"
+      },
+      "dev": "FLAG{dev-secdevlabs-tictactoe}",
+      "hints": [
+        "The statistics come from an API route that takes a player's name.",
+        "Read about broken access control."
+      ],
+      "steps": [
+        {
+          "key": "class",
+          "title": "Name the weakness",
+          "prompt": "Which OWASP category fits this lab?",
+          "check": {
+            "answer": [
+              "broken access control",
+              "idor",
+              "insecure direct object reference"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
